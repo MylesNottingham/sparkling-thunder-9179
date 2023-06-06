@@ -1,18 +1,29 @@
-<h1><%= @movie.title %></h1>
-<p>Year: <%= @movie.creation_year %></p>
-<p>Genre: <%= @movie.genre %></p>
-<% unless @movie.actors.empty? %>
+<section id="page-title">
+  <h1><%= @movie.title %></h1>
+  <p>Year: <%= @movie.creation_year %></p>
+  <p>Genre: <%= @movie.genre %></p>
+<section>
+<br/>
+
+<section id="actors">
+  <h3>Actors:</h3>
   <% @movie.actors_by_age.each do |actor| %>
     <section id="actor-<%= actor.id %>">
       <h4><%= actor.name %></h4>
       <p>Age: <%= actor.age %></p>
     </section>
   <% end %>
-<% end %><br/>
+</section>
+<br/>
 
-<p>Average Age of Actors: <%= @movie.average_age_of_actors.round %></p><br/>
+<h4 id="average-age">Average Age of Actors: <%= @movie.average_age_of_actors.round %></h4>
+<br/>
 
-<form action="/movies/<%= @movie.id %>" method="post">
-  <label for="actor_id">Add an Actor to this Movie by Actor ID</label>
-  <input type="number" name="actor_id" id="actor_id">
-  <input type="submit" value="Submit">
+<section id="add-actor">
+  <%= form_with(url: movie_actors_path(@movie), local: true) do |form| %>
+    <%= form.label :actor_id, "Add an Actor to this Movie by Actor ID" %>
+    <%= form.number_field :actor_id, id: "actor_id" %>
+    <%= form.hidden_field :movie_id, value: @movie.id %>
+    <%= form.submit "Submit" %>
+  <% end %>
+</section>

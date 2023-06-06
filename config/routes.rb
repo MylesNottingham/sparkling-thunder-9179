@@ -4,8 +4,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  get "/studios", to: "studios#index"
+  # get "/studios", to: "studios#index"
+  resources :studios, only: [:index]
 
-  get "/movies/:id", to: "movies#show"
-  post "/movies/:id", to: "movie_actors#create"
+  # get "/movies/:id", to: "movies#show"
+  resources :movies, only: [:show]
+
+  # post "/movie_actors", to: "movie_actors#create"
+  resources :movie_actors, only: [:create]
 end

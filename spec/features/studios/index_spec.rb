@@ -10,41 +10,47 @@ RSpec.describe "the studios index page" do
   let!(:movie_4) { studio_2.movies.create!(title: "Avatar", creation_year: 2009, genre: "Science Fiction") }
 
   before(:each) do
-    visit "/studios"
+    visit studios_path
   end
 
-  it "should display all Studios and thier associated movies" do
+  it "displays all Studios and thier associated movies" do
+    within("#page-title") do
+      expect(page).to have_content("Studios")
+    end
+
     within("#studio-#{studio_1.id}") do
-      expect(page).to have_content("Universal Studios")
-      expect(page).to have_content("Hollywood")
+      expect(page).to have_content(studio_1.name)
+      expect(page).to have_content("Location: #{studio_1.location}")
+      expect(page).to have_content("Movies:")
 
       within("#movie-#{movie_1.id}") do
-        expect(page).to have_content("Jurassic Park")
-        expect(page).to have_content("Year: 1993")
-        expect(page).to have_content("Genre: Action/Adventure")
+        expect(page).to have_content(movie_1.title)
+        expect(page).to have_content("Year: #{movie_1.creation_year}")
+        expect(page).to have_content("Genre: #{movie_1.genre}")
       end
 
       within("#movie-#{movie_2.id}") do
-        expect(page).to have_content("Gremlins")
-        expect(page).to have_content("Year: 1984")
-        expect(page).to have_content("Genre: Horror")
+        expect(page).to have_content(movie_2.title)
+        expect(page).to have_content("Year: #{movie_2.creation_year}")
+        expect(page).to have_content("Genre: #{movie_2.genre}")
       end
     end
 
     within("#studio-#{studio_2.id}") do
-      expect(page).to have_content("Disney")
-      expect(page).to have_content("Orlando")
+      expect(page).to have_content(studio_2.name)
+      expect(page).to have_content("Location: #{studio_2.location}")
+      expect(page).to have_content("Movies:")
 
       within("#movie-#{movie_3.id}") do
-        expect(page).to have_content("Toy Story")
-        expect(page).to have_content("Year: 1995")
-        expect(page).to have_content("Genre: Animation")
+        expect(page).to have_content(movie_3.title)
+        expect(page).to have_content("Year: #{movie_3.creation_year}")
+        expect(page).to have_content("Genre: #{movie_3.genre}")
       end
 
       within("#movie-#{movie_4.id}") do
-        expect(page).to have_content("Avatar")
-        expect(page).to have_content("Year: 2009")
-        expect(page).to have_content("Genre: Science Fiction")
+        expect(page).to have_content(movie_4.title)
+        expect(page).to have_content("Year: #{movie_4.creation_year}")
+        expect(page).to have_content("Genre: #{movie_4.genre}")
       end
     end
   end
