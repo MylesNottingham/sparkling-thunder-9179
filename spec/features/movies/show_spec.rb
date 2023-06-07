@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "the movies show page" do
+RSpec.describe "the movie's show page" do
   let!(:studio_1) { Studio.create!(name: "Universal Studios", location: "Hollywood") }
 
   let!(:movie_1) { studio_1.movies.create!(title: "Jurassic Park", creation_year: 1993, genre: "Action/Adventure") }
