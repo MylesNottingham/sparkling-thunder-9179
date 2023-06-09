@@ -20,7 +20,7 @@
 <br/>
 
 <section id="add-actor">
-  <%= form_with(url: movie_actors_path(@movie), local: true) do |form| %>
+  <%= form_with(url: movie_actors_path(@movie), method: :post, local: true) do |form| %>
     <%= form.label :actor_id, "Add an Actor to this Movie by Actor ID" %>
     <%= form.number_field :actor_id, id: "actor_id" %>
     <%= form.hidden_field :movie_id, value: @movie.id %>
